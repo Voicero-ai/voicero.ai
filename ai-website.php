@@ -45,6 +45,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/page-settings.php';
 require_once plugin_dir_path(__FILE__) . 'includes/page-chatbot-update.php';
 require_once plugin_dir_path(__FILE__) . 'includes/page-news.php';
 require_once plugin_dir_path(__FILE__) . 'includes/page-help.php';
+require_once plugin_dir_path(__FILE__) . 'includes/page-chats.php';
 
 // Force-enable the REST API if something else is blocking it
 add_action('init', function() {
@@ -147,7 +148,17 @@ function voicero_admin_page() {
         'voicero_render_ai_overview_page'             // Callback function
     );
 
-    // 2. Customize Chatbot (renamed from Chatbot Update)
+    // 2. Chats (conversations from AI assistant)
+    add_submenu_page(
+        'voicero-ai-admin',                           // Parent slug
+        esc_html__('Chats', 'voicero-ai'),            // Page title
+        esc_html__('Chats', 'voicero-ai'),            // Menu title
+        'manage_options',                             // Capability
+        'voicero-ai-chats',                           // Menu slug
+        'voicero_render_chats_page'                   // Callback function
+    );
+
+    // 3. Customize Chatbot (renamed from Chatbot Update)
     add_submenu_page(
         'voicero-ai-admin',                           // Parent slug
         esc_html__('Customize Chatbot', 'voicero-ai'), // Page title
@@ -157,7 +168,7 @@ function voicero_admin_page() {
         'voicero_render_chatbot_update_page'          // Callback function
     );
 
-    // 3. Help Interface (renamed from AI Overview)
+    // 4. Help Interface (renamed from AI Overview)
     add_submenu_page(
         'voicero-ai-admin',                           // Parent slug
         esc_html__('Help Interface', 'voicero-ai'),   // Page title
@@ -167,7 +178,7 @@ function voicero_admin_page() {
         'voicero_render_help_page_content'            // Callback function
     );
 
-    // 4. News Interface (placeholder - you can implement this later)
+    // 5. News Interface (placeholder - you can implement this later)
     add_submenu_page(
         'voicero-ai-admin',                           // Parent slug
         esc_html__('News Interface', 'voicero-ai'),   // Page title
@@ -177,7 +188,7 @@ function voicero_admin_page() {
         'voicero_render_news_page'                    // Callback function
     );
 
-    // 5. Settings (at the bottom)
+    // 6. Settings (at the bottom)
     add_submenu_page(
         'voicero-ai-admin',                           // Parent slug
         esc_html__('Settings', 'voicero-ai'),         // Page title
